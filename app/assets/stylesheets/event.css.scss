@@ -1,0 +1,186 @@
+// new
+
+#container-new-event{
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+    .event-new-form{
+      background: white;
+      width: 40%;
+      margin: 0 auto;
+      border-radius: 15px;
+      padding: 2rem;
+    }
+
+
+// index
+
+.container-index-event{
+  width: 100%;
+  background: black;
+  padding: 20px;
+}
+
+#search-form{
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+}
+
+#search-bar{
+  width: 40%;
+  border-radius: 15px;
+  padding: 5px 5px 5px 10px;
+  border: none;
+}
+
+.submit-form{
+  background: black;
+  border: none;
+  transition-delay: 0.4s;
+}
+
+.submit-form:hover{
+  cursor: pointer;
+}
+
+.submit-form:hover > .fa-search{
+  cursor: pointer;
+  color: #226F54;
+}
+
+.fa-search{
+  background: black;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.wrapper-index-event{
+  display: grid;
+  height: auto;
+  margin-top: 3rem;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 50px 20px;
+  grid-auto-rows: 30vh;
+}
+
+.div-event{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  grid-template-rows: 1fr 2fr 1fr;
+  background: black;
+}
+
+.div-event .w1{
+  grid-column: 1 / 3;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #2667FF;
+  padding: 5px 0;
+}
+
+.div-event .w2{
+  grid-column:1;
+  grid-row: 2;
+  background: #3F8EFC;
+}
+
+.div-event .wrapper-index-event-3{
+  grid-column:2;
+  grid-row: 2;
+  background: #ADD7F6;
+}
+
+.div-event .wrapper-index-event-3 p{
+  margin-left: 10%;
+}
+
+.div-event .w4{
+  grid-column: 1 / 3;
+  grid-row: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.div-event .w5{
+  grid-column: 1;
+  grid-row: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.div-event .w6{
+  grid-column: 2;
+  grid-row: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-add-guest{
+  background: #3B28CC;
+  border: none;
+  height: 100%;
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.btn-add-guest:hover{
+  background: #4E598C;
+  cursor: pointer;
+}
+
+.btn-delete-guest{
+  background: #CC2936;
+  border: none;
+  height: 100%;
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.btn-delete-guest:hover{
+  background: rgb(248, 1, 42);
+  cursor: pointer;
+}
+
+.btn-unsubscribed-guest{
+  background: rgb(49, 212, 212);
+  border: none;
+  height: 100%;
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.btn-unsubscribed-guest:hover{
+  background: rgb(1, 248, 153);
+  cursor: pointer;
+}
+
+.btn-edit-guest{
+  background: rgb(23, 206, 99);
+  border: none;
+  height: 100%;
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.btn-edit-guest:hover{
+  background: rgb(6, 155, 13);
+  cursor: pointer;
+}
+
+
+
+

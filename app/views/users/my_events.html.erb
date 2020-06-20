@@ -1,0 +1,66 @@
+<div class="container-my_events">
+    <div class="container-fluid">
+        <div class="row d-flex justify-content-around">
+            <% @events.each_with_index do |event, k| %>
+                <div class="col-3 event_card">
+                    <h2 class="text-center"><%= event.title %></h2>
+                    <div class="container-fluid d-flex">
+                        <div class="col-6 2">
+                            <h4>Description</h4>
+                            <p><%= event.description %></p>
+                        </div>
+                        <div class="col-6 3">
+                            <h4>Informations</h4>
+                            <ul class="d-flex flex-column">
+                                <li>Date: 26 janvier 2010</li>
+                                <li>Créer par: <%= User.find_by(id: event.user_id).firstname %></li>
+                                <li>Guests: <%= k %></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <%= form_tag event_path(event.id), method: "delete", class: 'w5' do %>
+                        <%= submit_tag "Supprimer", class: 'btn-delete-guest'%>
+                    <% end %>
+                </div>
+            <% end %>
+            <% if @k%3 == 1 %>
+                <div class="col-3 event_card-invisible"></div>
+                <div class="col-3 event_card-invisible"></div>
+            <% end %>
+            <% if @k%3 == 2 %>
+                <div class="col-3 event_card-invisible"></div>
+            <% end %>               
+        </div>
+
+
+
+        <div class="row d-flex justify-content-around">
+            <% @guest_events.each_with_index do |guest_event, k| %>
+                <div class="col-3 event_card">
+                    <h2 class="text-center"><%= guest_event.title %></h2>
+                    <div class="container-fluid d-flex">
+                        <div class="col-6 2">
+                            <h4>Description</h4>
+                            <p><%= guest_event.description %></p>
+                        </div>
+                        <div class="col-6 3">
+                            <h4>Informations</h4>
+                            <ul class="d-flex flex-column">
+                                <li>Date: 26 janvier 2010</li>
+                                <li>Créer par: <%= User.find_by(id: guest_event.user_id).firstname %></li>
+                                <li>Guests: <%= k %></li>
+                            </ul>
+                        </div>
+                    </div>                   
+                </div>
+            <% end %>
+            <% if @k%3 == 1 %>
+                <div class="col-3 event_card-invisible"></div>
+                <div class="col-3 event_card-invisible"></div>
+            <% end %>
+            <% if @k%3 == 2 %>
+                <div class="col-3 event_card-invisible"></div>
+            <% end %>               
+        </div>
+    </div>
+</div>
