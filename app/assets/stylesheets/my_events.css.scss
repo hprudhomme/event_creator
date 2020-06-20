@@ -27,3 +27,16 @@
     margin: 0; /* modifié */
     padding: 0;
 }
+
+.my_event_description{
+    word-wrap:break-word;
+}
+
+.my_event_informations{
+}
+
+.my_event_edit_button{
+    width: 100%;
+    border: none;
+    background: rgb(66, 206, 140);
+}

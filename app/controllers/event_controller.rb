@@ -1,4 +1,6 @@
 class EventController < ApplicationController
+    before_action :authenticate_user!
+    
     def index
       if params[:search].present?
         @events = Event.where(catégorie: params[:search])
