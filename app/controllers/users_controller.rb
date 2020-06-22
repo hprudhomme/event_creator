@@ -6,6 +6,13 @@ class UsersController < ApplicationController
     end
 
     def my_events
+
+        if current_user.id.to_i != params[:id].to_i
+            redirect_to root_path
+        end
+
+        @i = params[:id]
+
         @events = Event.where(user_id:current_user.id)
         @events_length = @events.length
 

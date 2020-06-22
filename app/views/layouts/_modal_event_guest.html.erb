@@ -1,0 +1,43 @@
+                <div class="modal fade" id='eventGuestModal<%=event.id%>' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <% if event.user_id == current_user.id %>
+                            <div class="modal-body">
+                                <% Guest.where(event_id: event.id).each_with_index do |guest, k| %>
+                                    <div class="d-flex justify-content-between">
+                                        <%= link_to guest.name, user_path(User.find_by(firstname: guest.name).id), class: 'text-dark' %>
+                                        <p><%= guest.id %></p>
+                                        <div>
+                                            <% if Guest.find(guest.id).admitted == false %>
+                                                <%= form_tag event_guest_path(event.id, guest.id), method: "patch", class: '' do %>   
+                                                    <%= button_tag type: 'submit', class: "", id: "" do %>
+                                                        <i class="fas fa-plus mr-2 accept-guest"></i>
+                                                    <% end %>
+                                                <%end%>
+                                            <% end %>
+                                            
+                                            <%= form_tag event_guest_path(event.id, guest.id), method: "delete", class: '' do %>   
+                                                <%= button_tag type: 'submit', class: "", id: "" do %>
+                                                    <i class="fas fa-times delete-guest"></i>
+                                                <% end %>
+                                            <%end%>
+                                        </div>
+                                    </div>
+                                <% end %>
+                            </div>
+                        <% else %>
+                            <div class="modal-body">
+                                <% Guest.where(event_id: event.id).each_with_index do |guest, k| %>
+                                        <%= link_to guest.name, user_path(User.find_by(firstname: guest.name).id), class: 'text-dark' %>
+                                <% end %>
+                            </div>
+                        <% end %>
+                        </div>
+                    </div>
+                </div>

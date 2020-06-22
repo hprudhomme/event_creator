@@ -1,0 +1,24 @@
+.chat{
+}
+
+.list-message{
+    list-style: none;
+    padding: 0;
+}
+
+.my_message{
+    background: #08A045;
+    width: auto;
+    float: right;
+}
+
+.other_message{
+    background: #6B7FD7;
+}
+
+.message{
+    padding: 15px 15px 0px 15px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-bottom: 10px;
+}

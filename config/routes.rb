@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :event do
     resources :guest
+    resources :message
   end
 
   devise_scope :user do  

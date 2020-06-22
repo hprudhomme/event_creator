@@ -80,6 +80,8 @@ if (document.getElementById('submit-event') != null) {
 let left = document.getElementById('left');
 let right = document.getElementById('right');
 let buttons = document.getElementsByClassName('btn');
+let event_card = document.getElementsByClassName('event_card');
+
 
 
 const t1 = new TimelineMax();
@@ -107,6 +109,11 @@ t1.fromTo(
     { display: "none"},
     { display: "block", ease: Power0.easeInOut},
     "-=0.5"
+  ).fromTo(
+    event_card[0],
+    1,
+    { height: "0%"},
+    { height: "100%", ease: Power2.easeInOut}
   )
 
   

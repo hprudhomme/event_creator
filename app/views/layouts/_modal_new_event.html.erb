@@ -1,0 +1,45 @@
+<% if user_signed_in? %>
+      <div class="modal fade text-dark" id="newEventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+              <h5 class="text-center" id="exampleModalLongTitle">New event</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+            <%= form_for Event.new, url: url_for(controller: 'event', action: 'create') do |f| %>
+              <div class="form-group">
+                <%= label(:q, "Title:") %>
+                <%= f.text_field :title, class: 'form-control', id: 'new-event-title'%>
+              </div>
+              <div class="form-group">
+                <%= label(:q, "Catégorie:") %>
+                <%= f.text_field :catégorie, class: 'form-control', id: 'new-event-categorie'%>
+              </div>
+
+              <div class="form-group">
+                <%= label(:q, "Description:") %>
+                <%= f.text_field :description, class: 'form-control', id: 'new-event-description'%>
+              </div>
+              
+              <div class="form-group d-flex justify-content-between">
+                <div>
+                  <label for="start">Date:</label>
+                  <%= f.date_field :date %>
+
+                </div>
+                <div>
+                  <%= f.label "Public" %>
+                  <%= f.check_box :public, { checked: false }, true, false %> <br />
+                </div>
+              </div>
+
+              <%= f.submit "Add", class: "btn btn-primary btn-block", id: "submit-event"%>
+            <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>

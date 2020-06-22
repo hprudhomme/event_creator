@@ -1,0 +1,128 @@
+<div class="modal fade" id="eventModal<%=event.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eventModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><%= event.title %></p>
+                <p><%= event.catégorie %></p>
+                <p><%= event.description %></p>
+                <p data-toggle="modal" data-target='#eventGuestModal<%=event.id%>'>Guests</p>
+            <% if User.find_by(id: event.user_id).id == current_user.id %>
+                <%= form_tag event_path(event.id), method: "delete", class: 'w4' do %>
+                    <%= submit_tag "Supprimer", class: 'btn-delete-guest'%>
+                <% end %>
+            <% elsif isAlreadyGuest(current_user, event) %>
+                <%= form_tag event_guest_path(event.id, Guest.find_by(event_id: event.id, name: current_user.firstname).id), method: "delete", class: 'w4' do %>
+                    <%= submit_tag "Se désinscrire", class: 'btn-unsubscribed-guest'%>
+                <% end %>
+            <% else %>
+                <%= form_tag event_guest_index_path(event.id), method: "post", class: 'w4' do %>
+                    <input type="hidden" name="authenticity_token" value= <%= form_authenticity_token %> >
+                    <%= submit_tag "S'inscrire", class: 'btn-add-guest'%>
+                <% end %>
+            <% end %>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<div class="modal fade" id='eventGuestModal<%=event.id%>' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <% if event.user_id == current_user.id %>
+            <div class="modal-body">
+                <% Guest.where(event_id: event.id).each_with_index do |guest, k| %>
+                    <div class="d-flex justify-content-between">
+                        <%= link_to guest.name, user_path(User.find_by(firstname: guest.name).id), class: 'text-dark' %>
+                        <p><%= guest.id %></p>
+                        <div>
+                            <% if Guest.find(guest.id).admitted == false %>
+                                <%= form_tag event_guest_path(event.id, guest.id), method: "patch", class: '' do %>   
+                                    <%= button_tag type: 'submit', class: "", id: "" do %>
+                                        <i class="fas fa-plus mr-2 accept-guest"></i>
+                                    <% end %>
+                                <%end%>
+                            <% end %>
+                            
+                            <%= form_tag event_guest_path(event.id, guest.id), method: "delete", class: '' do %>   
+                                <%= button_tag type: 'submit', class: "", id: "" do %>
+                                    <i class="fas fa-times delete-guest"></i>
+                                <% end %>
+                            <%end%>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        <% else %>
+            <div class="modal-body">
+                <% Guest.where(event_id: event.id).each_with_index do |guest, k| %>
+                        <%= link_to guest.name, user_path(User.find_by(firstname: guest.name).id), class: 'text-dark' %>
+                <% end %>
+            </div>
+        <% end %>
+        </div>
+    </div>
+</div>
+
+
+
+                <div class="modal fade" id="myModal<%=event.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <%= form_tag event_path(event.id), method: "patch", class: '' do %>
+                                    <div class="form-group">
+                                        <%= label_tag(:q, "Title:") %>
+                                        <%= text_field_tag :title, event.title,placeholder: 'Ajouter un titre', class: 'form-control', id: 'new-event-title'%>
+                                    </div>
+                                    <div class="form-group">
+                                        <%= label_tag(:q, "Catégorie:") %>
+                                        <%= text_field_tag :catégorie, event.catégorie, placeholder: 'Ajouter une catégorie', class: 'form-control', id: 'new-event-categorie'%>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <%= label_tag(:q, "Description:") %>
+                                        <%= text_field_tag :description, event.description ,placeholder: 'Ajouter une description', class: 'form-control', id: 'new-event-description'%>
+                                    </div>
+                                    
+                                    <div class="form-group d-flex justify-content-between">
+                                    <div>
+                                        <label for="start">Date:</label>
+                                        <%= date_field_tag :date %>
+
+                                    </div>
+                                    <div>
+                                        <%= check_box_tag(:public) %>
+                                        <%= label_tag(:public, "public") %>
+                                    </div>
+                                    </div>
+
+                                    <%= submit_tag("Edit", class: "btn btn-primary btn-block", id: "submit-event") %>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
