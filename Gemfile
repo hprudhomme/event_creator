@@ -5,15 +5,22 @@ ruby '2.5.1'
 
 gem 'jquery-rails'
 gem 'jquery'
+gem 'jquery-ui-rails'
 gem 'bootstrap'
 gem 'pg'
 gem "letter_opener", :group => :development 
 
 gem "font-awesome-rails"
+gem 'simple_form'
+
+gem 'pickadate-rails'
+gem 'flatpickr_rails'
 
 gem 'table_print'
 gem 'devise'
 gem 'faker'
+
+gem 'webpacker'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.4'
 # Use sqlite3 as the database for Active Record

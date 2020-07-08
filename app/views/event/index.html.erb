@@ -1,42 +1,39 @@
 <div class="container-index-event">
-    <%= form_tag(event_index_path, :method => "get", id: "search-form") do %>
-        <%= text_field_tag :search, params[:search], id: 'search-bar', placeholder: "Search Catégorie" %>
-        <button type="submit" class="submit-form"><i class="fas fa-search"></i></button>
-    <% end %>
-    <div class="wrapper-index-event">
+    <div class="d-flex search-form">
+        <span class"">Filter by :</span>
+        <%= form_tag(event_index_path, :method => "get", id: "search-form") do %>
+            <%= text_field_tag :searchCategorie, params[:searchCategorie], id: 'search-bar', placeholder: "Catégorie" %>
+            <%= text_field_tag :searchDate, params[:searchDate], class: 'datepicker-search', id: 'search-bar', placeholder: "Date" %>
+            <button type="submit" class="submit-form"><i class="fas fa-search"></i></button>
+        <% end %>
+    </div>
+    <div class="container">
         <% @events.each_with_index do |event, k| %>
-            <div class="div-event">
-                <h3 class="text-center w1" data-toggle="modal" data-target="#eventModal<%=event.id%>"><%= event.title %></h3>
-                <div class="w2" data-toggle="modal" data-target="#eventModal<%=event.id%>">
-                    <h4 class="text-center pt-2">Description</h4>
-                    <p class="text-center pl-5 pr-5"><%= event.description %></p>
-                </div>
-                <div class="wrapper-index-event-3" data-toggle="modal" data-target="#eventModal<%=event.id%>">
-                    <h4 class="text-center pt-2">Informations</h4>
-                    <p class=""> Date: 26 janvier 2020</p>
-                    <p> Créer par: <%= User.find_by(id: event.user_id).firstname %></p>
-                    <p> Invités: 1/8 </p>
-                </div>
-                <% if User.find_by(id: event.user_id).id == current_user.id %>
-                    <%= form_tag event_path(event.id), method: "delete", class: 'w5' do %>
-                        <%= submit_tag "Supprimer", class: 'btn-delete-guest'%>
-                    <% end %>
-                    <div class= "w6">
-                        <button data-toggle="modal" data-target="#myModal<%=event.id%>" data-remote="<%= edit_event_path(event.id) %> #modal-edit-fields" class="btn-edit-guest">Edit</a>
+            <div class="card">
+                <div class="more-info-index-event" data-toggle="modal" data-target="#eventModal<%=event.id%>"><i class="fas fa-plus"></i></div>
+                <div class="contentBx">
+                    <h2><%= event.title %></h2>
+                    <div class="date">
+                        <h3><%= event.date.strftime("%A %d %B") %></h3>
                     </div>
-                <% elsif isAlreadyGuest(current_user, event) %>
-                    <%= form_tag event_guest_path(event.id, Guest.find_by(event_id: event.id, name: current_user.firstname).id), method: "delete", class: 'w4' do %>
-                        <%= submit_tag "Se désinscrire", class: 'btn-unsubscribed-guest'%>
+                    <div class="horaire">
+                        <h3><%= event.date.to_formatted_s(:time).gsub!(':', 'h')%></h3>
+                    </div>
+                    <% if User.find_by(id: event.user_id).id != current_user.id %>
+                        <% if isAlreadyGuest(current_user, event) %>
+                            <%= form_tag event_guest_path(event.id, Guest.find_by(event_id: event.id, name: current_user.firstname).id), method: "delete", class: 'form-subscrib' do %>
+                                <%= submit_tag "Se désinscrire", class: 'btn-subscrib'%>
+                            <% end %>
+                        <% else %>
+                            <%= form_tag event_guest_index_path(event.id), method: "post", class: 'form-unsuscrib' do %>
+                                <input type="hidden" name="authenticity_token" value= <%= form_authenticity_token %> >
+                                <%= hidden_field_tag :admitted, 0 %>
+                                <%= submit_tag "S'inscrire", class: 'btn-subscrib'%>
+                            <% end %>
+                        <% end %>
                     <% end %>
-                <% else %>
-                    <%= form_tag event_guest_index_path(event.id), method: "post", class: 'w4' do %>
-                        <input type="hidden" name="authenticity_token" value= <%= form_authenticity_token %> >
-                        <%= submit_tag "S'inscrire", class: 'btn-add-guest'%>
-                    <% end %>
-                <% end %>
-
+                </div>
                 <%= render 'layouts/modal_events_all', event: event %>
-
             </div>
         <% end %>
     </div>

@@ -11,13 +11,19 @@
 // about supported directives.
 //
 //= require rails-ujs
+//= require jquery-ui
 //= require activestorage
 //= require turbolinks
-//= require_tree .
+
 //=require custom
 
-//= require jquery
-//= require jquery_ujs
+//= require pickadate/picker
+//= require pickadate/picker.date
+//= require pickadate/picker.time
+
+//= require_tree .
 
 //= require popper
+
+//= require pickadate/translations/bg_BG
 

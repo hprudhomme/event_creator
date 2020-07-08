@@ -1,0 +1,78 @@
+<div class="container-my_events">
+    <div class="container-fluid">
+        <h1 class="text-center text-white">Events créés</h1>
+        <div class="row d-flex justify-content-around">
+            <% @events.each_with_index do |event, k| %>
+                <div class="col-3 event_card">
+                    <div class="more-info" data-toggle="modal" data-target="#eventModal<%=event.id%>"><i class="fas fa-plus"></i></div>
+                    <div class="link-to-chat" data-toggle="modal" data-target="#eventChatModal<%=event.id%>"><i class="fas fa-comments"></i></div>
+                    <h2 class="text-center events-title"><%= event.title %></h2>
+                    <div class="event-article">
+                        <p><%= event.description %>
+                    </div>
+                    <div class="event-article">
+                        <ul class="d-flex flex-column">
+                            <li>Date: 26 janvier 2010</li>
+                            <li>Créer par: <%= User.find_by(id: event.user_id).firstname %></li>
+                            <li>Guests: <%= k %></li>
+                        </ul>
+                    </div>
+                    <%= form_tag event_path(event.id), method: "delete", class: 'w5' do %>
+                        <%= submit_tag "Supprimer", class: 'btn-delete-guest'%>
+                    <% end %>
+                    <button data-toggle="modal" data-target="#myModal<%=event.id%>" data-remote="<%= edit_event_path(event.id) %> #modal-edit-fields" class="my_event_edit_button">Edit</a>
+                </div>
+
+                <%= render 'layouts/modal_edit_event', event: event %>
+                <%= render 'layouts/modal_event', event:event %>
+                <%= render 'layouts/modal_event_guest', event:event %>
+                <%= render 'layouts/modal_event_chat', event: event %>
+                
+            <% end %>
+            <% if @events_length%3 == 1 %>
+                <div class="col-3 event_card-invisible"></div>
+                <div class="col-3 event_card-invisible"></div>
+            <% end %>
+            <% if @events_length%3 == 2 %>
+                <div class="col-3 event_card-invisible"></div>
+            <% end %>               
+        </div>
+
+
+        <h1 class="text-center text-white">Events invités</h1>               
+        <div class="row d-flex justify-content-around">
+            <% @guest_events.each_with_index do |guest_event, k| %>
+                <div class="col-3 event_card">
+                    <h2 class="text-center" data-toggle="modal" data-target="#eventModal<%=guest_event.id%>"><%= guest_event.title %></h2>
+                    <div class="container-fluid d-flex">
+                        <div class="col-6 2">
+                            <h4 data-toggle="modal" data-target="#eventChatModal<%=guest_event.id%>">Description</h4>
+                            <p><%= guest_event.description %></p>
+                        </div>
+                        <div class="col-6 3">
+                            <h4>Informations</h4>
+                            <ul class="d-flex flex-column">
+                                <li>Date: 26 janvier 2010</li>
+                                <li>Créer par: <%= User.find_by(id: guest_event.user_id).firstname %></li>
+                                <li>Guests: <%= k %></li>
+                            </ul>
+                        </div>
+                    </div>                   
+                </div>
+
+                <%= render 'layouts/modal_edit_event', event: guest_event %>
+                <%= render 'layouts/modal_event', event:guest_event %>
+                <%= render 'layouts/modal_event_guest', event:guest_event %>
+                <%= render 'layouts/modal_event_chat', event: guest_event %>
+
+            <% end %>
+            <% if @guest_events_length%3 == 1 %>
+                <div class="col-3 event_card-invisible"></div>
+                <div class="col-3 event_card-invisible"></div>
+            <% end %>
+            <% if @guest_events_length%3 == 2 %>
+                <div class="col-3 event_card-invisible"></div>
+            <% end %>               
+        </div>
+    </div>
+</div>

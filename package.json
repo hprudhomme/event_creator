@@ -1,5 +1,12 @@
 {
   "name": "event_creator",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "@rails/webpacker": "5.1.1",
+    "flatpickr": "^4.6.3",
+    "jquery": "^3.5.1"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.11.0"
+  }
 }

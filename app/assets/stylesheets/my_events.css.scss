@@ -1,3 +1,4 @@
+/*
 .container-my_events{
     width: 100%;
     background: black;
@@ -32,7 +33,7 @@
 
 .event_card ul{
     list-style: none;
-    margin: 0; /* modifié */
+    margin: 0; 
     padding: 0;
 }
 
@@ -57,40 +58,130 @@
 .event-article{
     padding-left: 3rem;
     padding-right: 2rem;
-}
+} */
 
-.more-info{
-    position: absolute;
-    height: 4vh;
-    width: 4vh;
-    background: white;
-    right: -3%;
-    top: -4%;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.more-info:hover{
-    background: blue;
+.first-title-my-events{
+    margin-top: 3rem;
 }
 
 .link-to-chat{
     position: absolute;
     height: 4vh;
     width: 4vh;
-    background: white;
-    right: -3%;
-    top: 15%;
+    background: none;
+    top: 3%;
+    left: 2%;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    opacity: 0;
+    transition-delay: 0.4s;
 }
 
-.link-to-chat:hover{
-    background: green;
+.container .card:hover .link-to-chat{
+    opacity: 1;
+  }
+  
+  .link-to-chat:hover{
+    background: #232323;
+    color: whitesmoke;
+    transition-delay: 0s;
+  }
+
+  .card-edit-event{
+    position: absolute;
+    height: 4vh;
+    width: 4vh;
+    background: none;
+    bottom: 3%;
+    left: 2%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition-delay: 0.4s;
 }
+
+.container .card:hover .card-edit-event{
+    opacity: 1;
+  }
+  
+  .card-edit-event:hover{
+    background: #232323;
+    color: whitesmoke;
+    transition-delay: 0s;
+  }
+
+
+  .card-delete-event{
+    position: absolute;
+    height: 4vh;
+    width: 4vh;
+    bottom: 3%;
+    right: 2%;  
+}
+
+.card-delete-event button{
+    height: 4vh;
+    width: 4vh;
+    background: none;
+    bottom: 3%;
+    right: 2%;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition-delay: 0.4s;
+}
+
+.container .card:hover .card-delete-event button{
+    opacity: 1;
+  }
+  
+  .card-delete-event button:hover{
+    background: #232323;
+    color: whitesmoke;
+    transition-delay: 0s;
+  }
+
+
+  .refuse-events{
+    position: absolute;
+    height: 4vh;
+    width: 4vh;
+    top: 3%;
+    left: 2%;  
+}
+
+.refuse-events button{
+    height: 4vh;
+    width: 4vh;
+    background: none;
+    bottom: 3%;
+    right: 2%;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition-delay: 0.4s;
+}
+
+.container .card:hover .refuse-events button{
+    opacity: 1;
+  }
+  
+  .refuse-events button:hover{
+    background: #232323;
+    color: whitesmoke;
+    transition-delay: 0s;
+  }
