@@ -3,7 +3,7 @@
           <div class="wrapper">
               <div class="one">
                   <div id="profil-picture">
-                      <img class="fit-picture" src="#" alt="prfril-pciture">
+                      <p><%= @user.avatar.attached? %></p>
                   </div>
                   <h3 id="name"><%= @user.firstname + " " + @user.lastname %></h3>
               </div>

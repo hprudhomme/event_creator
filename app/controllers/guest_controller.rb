@@ -1,15 +1,22 @@
 class GuestController < ApplicationController
     def create
         @id = current_user.id
-        @guest = Guest.new(event_id: params[:event_id], name: current_user.firstname)
+
+        if params[:id_of_user].present?
+          @name = User.find(params[:id_of_user]).firstname
+        else
+          @name = current_user.firstname
+        end
+
+        @guest = Guest.new(event_id: params[:event_id], name: @name, admitted: params[:admitted])
 
         if @guest.save
           puts "Save"
           @user = User.find_by id:@id;
-          redirect_to event_index_path;
+          redirect_to request.referrer;
         else
           puts "fail";
-          redirect_to event_index_path;
+          redirect_to request.referrer;
         end
     end
 
@@ -18,7 +25,7 @@ class GuestController < ApplicationController
       puts params
 
       @guest = Guest.find(params[:id])
-      if @guest.update(admitted: true)
+      if @guest.update(admitted: 2)
           redirect_to request.referrer;
       else
         redirect_to request.referrer;

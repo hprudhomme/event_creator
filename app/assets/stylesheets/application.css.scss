@@ -12,4 +12,9 @@
  *
  *= require_tree .
  *= require_self
+
+ *= require jquery-ui
+ *= require pickadate/default
+*= require pickadate/default.date
+*= require pickadate/default.time
  */

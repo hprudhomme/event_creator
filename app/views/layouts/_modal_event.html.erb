@@ -11,6 +11,8 @@
                                 <p><%= event.title %></p>
                                 <p><%= event.catégorie %></p>
                                 <p><%= event.description %></p>
+                                <p><%= event.date.strftime("%A %d %B") %></p>
+                                <p><%= event.date.to_formatted_s(:time).gsub!(':', 'h')%></p>
                                 <p data-toggle="modal" data-target='#eventGuestModal<%=event.id%>'>Guests</p>
                             <% if User.find_by(id: event.user_id).id == current_user.id %>
                                 <%= form_tag event_path(event.id), method: "delete", class: 'w4' do %>

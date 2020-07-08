@@ -1,4 +1,4 @@
-    <header>
+<header>
       <div class="menu-toggle" id="hamburger">
           <i class="fas fa-bars"></i>
       </div>
@@ -31,7 +31,7 @@
           <% end %>
         </ul>
       </div>
-      <div class="container-navbar container">
+      <div class="container">
         <h2 class="title">bla<span id="title-color">bla</span></h2>
         <nav id="nav">
           <ul>
@@ -42,17 +42,9 @@
               <li>
                 <%= link_to "Profil", user_path(current_user.id) %>
               </li>
-
-              <li>
-                <%= link_to "Events", event_index_path %>
-              </li>
               
               <li>
                 <%= link_to "Mes events", user_events_path(current_user.id) %>
-              </li>
-
-              <li>
-                <a data-toggle="modal" data-target="#newEventModal" data-remote="<%= new_event_path %> #modal-new-fields" class="text-center add-categorie">New event</a>
               </li>
 
               <li class="sign-out">

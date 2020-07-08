@@ -2,10 +2,50 @@ class EventController < ApplicationController
     before_action :authenticate_user!
     
     def index
-      if params[:search].present?
-        @events = Event.where(catégorie: params[:search])
+
+      if  params[:searchCategorie].present? && params[:searchDate].present?
+
+        @all_events = Event.where(catégorie: params[:searchCategorie])
+        @all_events = @all_events.where.not(user_id: current_user.id)
+
+        @same_date_events = Array.new
+        i = 0
+        j = 0
+        while i < @all_events.length do
+            if @all_events[i].date.strftime("%F") == params[:searchDate]
+              @same_date_events[j] = @all_events[i]
+              j += 1
+            end
+            i += 1
+        end 
+        @events = @same_date_events
+
+      elsif params[:searchCategorie].present? && params[:searchDate].blank?
+
+        @events = Event.where(catégorie: params[:searchCategorie])
+        @events = @events.where.not(user_id: current_user.id)
+
+      elsif params[:searchDate].present? && params[:searchCategorie].blank?
+
+        @all_events = Event.where.not(user_id: current_user.id)
+        @same_date_events = Array.new
+
+        i = 0
+        j = 0
+        while i < @all_events.length do
+            if @all_events[i].date.strftime("%F") == params[:searchDate]
+              @same_date_events[j] = @all_events[i]
+              j += 1
+            end
+            i += 1
+        end 
+        @events = @same_date_events
+        
       else
-        @events = Event.all
+
+        @events = Event.where.not(user_id: current_user.id)
+        @url = request.url
+
       end
     end
 
@@ -34,7 +74,7 @@ class EventController < ApplicationController
             @public = true
           end
         end
-
+ 
 
         @event = Event.new(user_id: @id, title: @params_event["title"], description: @params_event["description"], catégorie: @params_event["catégorie"], date: @params_event["date"], public: @public)
 

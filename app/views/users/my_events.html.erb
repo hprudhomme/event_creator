@@ -1,78 +1,140 @@
-<div class="container-my_events">
-    <div class="container-fluid">
-        <h1 class="text-center text-white">Events créés</h1>
-        <div class="row d-flex justify-content-around">
-            <% @events.each_with_index do |event, k| %>
-                <div class="col-3 event_card">
-                    <div class="more-info" data-toggle="modal" data-target="#eventModal<%=event.id%>"><i class="fas fa-plus"></i></div>
-                    <div class="link-to-chat" data-toggle="modal" data-target="#eventChatModal<%=event.id%>"><i class="fas fa-comments"></i></div>
-                    <h2 class="text-center events-title"><%= event.title %></h2>
-                    <div class="event-article">
-                        <p><%= event.description %>
-                    </div>
-                    <div class="event-article">
-                        <ul class="d-flex flex-column">
-                            <li>Date: 26 janvier 2010</li>
-                            <li>Créer par: <%= User.find_by(id: event.user_id).firstname %></li>
-                            <li>Guests: <%= k %></li>
-                        </ul>
-                    </div>
-                    <%= form_tag event_path(event.id), method: "delete", class: 'w5' do %>
-                        <%= submit_tag "Supprimer", class: 'btn-delete-guest'%>
-                    <% end %>
-                    <button data-toggle="modal" data-target="#myModal<%=event.id%>" data-remote="<%= edit_event_path(event.id) %> #modal-edit-fields" class="my_event_edit_button">Edit</a>
-                </div>
+<div class="container-index-event">
+    <% if @events.length == 0 && @guest_events_accepted.length == 0 && @guest_events_waiting.length == 0 %>
+        <h1 class="text-center text-white first-title-my-events">Aucun event en cours</h1>
+    <% else %>
+        <% if @events.length != 0 %>
+            <h1 class="text-center text-white first-title-my-events">Events créés</h1>
+            <div class="container">
+                <% @events.each_with_index do |event, k| %>
+                    <div class="card">
 
-                <%= render 'layouts/modal_edit_event', event: event %>
-                <%= render 'layouts/modal_event', event:event %>
-                <%= render 'layouts/modal_event_guest', event:event %>
-                <%= render 'layouts/modal_event_chat', event: event %>
-                
-            <% end %>
-            <% if @events_length%3 == 1 %>
-                <div class="col-3 event_card-invisible"></div>
-                <div class="col-3 event_card-invisible"></div>
-            <% end %>
-            <% if @events_length%3 == 2 %>
-                <div class="col-3 event_card-invisible"></div>
-            <% end %>               
-        </div>
-
-
-        <h1 class="text-center text-white">Events invités</h1>               
-        <div class="row d-flex justify-content-around">
-            <% @guest_events.each_with_index do |guest_event, k| %>
-                <div class="col-3 event_card">
-                    <h2 class="text-center" data-toggle="modal" data-target="#eventModal<%=guest_event.id%>"><%= guest_event.title %></h2>
-                    <div class="container-fluid d-flex">
-                        <div class="col-6 2">
-                            <h4 data-toggle="modal" data-target="#eventChatModal<%=guest_event.id%>">Description</h4>
-                            <p><%= guest_event.description %></p>
+                        <div class="more-info-index-event" data-toggle="modal" data-target="#eventModal<%=event.id%>"><i class="fas fa-plus"></i></div>
+                        <div class="link-to-chat" data-toggle="modal" data-target="#eventChatModal<%=event.id%>"><i class="fas fa-comments"></i></div>
+                        <div class="card-edit-event" data-toggle="modal" data-target="#myModal<%=event.id%>" data-remote="<%= edit_event_path(event.id) %> #modal-edit-fields"><i class="fas fa-edit"></i></div>
+                        <%= form_tag event_path(event.id), method: "delete", class: 'card-delete-event' do %>
+                            <%= button_tag type: 'submit', class: "", id: "register-button" do %>
+                                <i class="fas fa-trash-alt" aria-hidden="true"></i>
+                            <% end %>
+                        <% end %>
+                        
+                        <div class="contentBx">
+                            <h2><%= event.title %></h2>
+                            <div class="date">
+                                <h3><%= event.date.strftime("%A %d %B") %></h3>
+                            </div>
+                            <div class="horaire">
+                                <h3><%= event.date.to_formatted_s(:time).gsub!(':', 'h')%></h3>
+                            </div>
+                            <% if User.find_by(id: event.user_id).id != current_user.id %>
+                                <% if isAlreadyGuest(current_user, event) %>
+                                    <%= form_tag event_guest_path(event.id, Guest.find_by(event_id: event.id, name: current_user.firstname).id), method: "delete", class: 'form-subscrib' do %>
+                                        <%= submit_tag "Se désinscrire", class: 'btn-subscrib'%>
+                                    <% end %>
+                                <% else %>
+                                    <%= form_tag event_guest_index_path(event.id), method: "post", class: 'form-unsuscrib' do %>
+                                        <input type="hidden" name="authenticity_token" value= <%= form_authenticity_token %> >
+                                        <%= submit_tag "S'inscrire", class: 'btn-subscrib'%>
+                                    <% end %>
+                                <% end %>
+                            <% end %>
                         </div>
-                        <div class="col-6 3">
-                            <h4>Informations</h4>
-                            <ul class="d-flex flex-column">
-                                <li>Date: 26 janvier 2010</li>
-                                <li>Créer par: <%= User.find_by(id: guest_event.user_id).firstname %></li>
-                                <li>Guests: <%= k %></li>
-                            </ul>
+                        <%= render 'layouts/modal_edit_event', event: event %>
+                        <%= render 'layouts/modal_event', event:event %>
+                        <%= render 'layouts/modal_event_guest', event:event %>
+                        <%= render 'layouts/modal_event_chat', event: event %>
+                    </div>
+                <% end %>
+            </div>
+        <% end %>
+
+        <% if @guest_events_accepted.length != 0 %>
+            <h1 class="text-center text-white">Events invités/acceptés</h1>
+            <div class="container">
+                <% @guest_events_accepted.each_with_index do |guest_events_accepted, k| %>
+                    <div class="card">
+                        <div class="link-to-chat" data-toggle="modal" data-target="#eventChatModal<%=guest_events_accepted.id%>"><i class="fas fa-comments"></i></div>
+                        <div class="more-info-index-event" data-toggle="modal" data-target="#eventModal<%=guest_events_accepted.id%>"><i class="fas fa-plus"></i></div>
+                        
+                        <div class="contentBx">
+                            <h2><%= guest_events_accepted.title %></h2>
+                            <div class="date">
+                                <h3>jeudi 26 octobre</h3>
+                            </div>
+                            <div class="horaire">
+                                <h3>18h</h3>
+                            </div>
+                            
+                            <%= form_tag event_guest_path(guest_events_accepted.id, Guest.find_by(event_id: guest_events_accepted.id, name: current_user.firstname).id), method: "delete", class: 'form-subscrib' do %>
+                                <%= submit_tag "Se désinscrire", class: 'btn-subscrib'%>
+                            <% end %>
+                            
                         </div>
-                    </div>                   
-                </div>
+                        <%= render 'layouts/modal_events_all', event: guest_events_accepted %>
+                        <%= render 'layouts/modal_event_chat', event: guest_events_accepted %>
+                    </div>
+                <% end %>
+            </div>
+        <% end %>
 
-                <%= render 'layouts/modal_edit_event', event: guest_event %>
-                <%= render 'layouts/modal_event', event:guest_event %>
-                <%= render 'layouts/modal_event_guest', event:guest_event %>
-                <%= render 'layouts/modal_event_chat', event: guest_event %>
 
-            <% end %>
-            <% if @guest_events_length%3 == 1 %>
-                <div class="col-3 event_card-invisible"></div>
-                <div class="col-3 event_card-invisible"></div>
-            <% end %>
-            <% if @guest_events_length%3 == 2 %>
-                <div class="col-3 event_card-invisible"></div>
-            <% end %>               
-        </div>
+        <% if @guest_events_waiting.length != 0 %>
+            <h1 class="text-center text-white">Events en attente</h1>
+            <div class="container">
+                <% @guest_events_waiting.each_with_index do |guest_events_waiting, k| %>
+                    <div class="card">
+                        <div class="more-info-index-event" data-toggle="modal" data-target="#eventModal<%=guest_events_waiting.id%>"><i class="fas fa-plus"></i></div>
+                        <div class="contentBx">
+                            <h2><%= guest_events_waiting.title %></h2>
+                            <div class="date">
+                                <h3>jeudi 26 octobre</h3>
+                            </div>
+                            <div class="horaire">
+                                <h3>18h</h3>
+                            </div>
+                            
+                            <%= form_tag event_guest_path(guest_events_waiting.id, Guest.find_by(event_id: guest_events_waiting.id, name: current_user.firstname).id), method: "delete", class: 'form-subscrib' do %>
+                                <%= submit_tag "Se désinscrire", class: 'btn-subscrib'%>
+                            <% end %>
+                            
+                        </div>
+                        <%= render 'layouts/modal_events_all', event: guest_events_waiting %>
+                    </div>
+                <% end %>
+            </div>
+        <% end %>
+
+
+        <% if @guest_events_invited.length != 0 %>
+            <h1 class="text-center text-white">Events invités</h1>
+            <div class="container">
+                <% @guest_events_invited.each_with_index do |guest_events_invited, k| %>
+                    <div class="card">
+                        <div class="more-info-index-event" data-toggle="modal" data-target="#eventModal<%=guest_events_invited.id%>"><i class="fas fa-plus"></i></div>
+                        <%= form_tag event_guest_path(guest_events_invited.id, Guest.find_by(event_id: guest_events_invited.id, name: current_user.firstname).id), method: "delete", class: 'refuse-events' do %>
+                            <%= button_tag type: 'submit', class: "", id: "register-button" do %>
+                                <i class="fas fa-trash-alt" aria-hidden="true"></i>
+                            <% end %>
+                        <% end %>
+                        
+                        <div class="contentBx">
+                            <h2><%= guest_events_invited.title %></h2>
+                            <div class="date">
+                                <h3>jeudi 26 octobre</h3>
+                            </div>
+                            <div class="horaire">
+                                <h3>18h</h3>
+                            </div>
+                            
+                            <%= form_tag event_guest_path(guest_events_invited.id, Guest.find_by(event_id: guest_events_invited.id, name: current_user.firstname).id), method: "patch", class: '' do %>
+                                <%= submit_tag "Accepter", class: 'btn-subscrib'%>
+                            <% end %>
+                            
+                        </div>
+                        <%= render 'layouts/modal_events_all', event: guest_events_invited %>
+                    </div>
+                <% end %>
+            </div>
+        <% end %>
+    <% end %>
     </div>
 </div>

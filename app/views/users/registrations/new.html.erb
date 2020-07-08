@@ -13,6 +13,8 @@
     <%= f.text_field :lastname, autofocus: true, autocomplete: "lastname" %>
   </div>
 
+  <%= f.file_field :avatar %>
+
   <div class="field">
     <%= f.label :birthdate %><br />
     <%= f.date_select :birthdate, start_year: 1995 %>
