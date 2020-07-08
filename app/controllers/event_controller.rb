@@ -9,6 +9,10 @@ class EventController < ApplicationController
       end
     end
 
+    def show
+      @event = Event.find(params[:id])
+    end
+
 
     def new
       
@@ -45,10 +49,6 @@ class EventController < ApplicationController
         end
     end
 
-    def update
-      puts params
-    end
-
     def destroy
       @event = Event.find(params[:id])
       @event.destroy
@@ -63,8 +63,7 @@ class EventController < ApplicationController
       @id = params[:id]
     end
 
-    def update
-      
+    def update     
         if !params[:public].present?
           @public = false
         else
@@ -77,5 +76,5 @@ class EventController < ApplicationController
       else
         redirect_to request.referrer;
       end
-  end
+    end
 end

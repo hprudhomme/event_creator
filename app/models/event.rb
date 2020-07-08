@@ -1,5 +1,6 @@
 class Event < ApplicationRecord
     has_many :guests, dependent: :destroy
+    has_many :messages, dependent: :destroy
 
     belongs_to :user
 

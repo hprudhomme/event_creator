@@ -12,14 +12,22 @@
 
 .event_card{
     height: auto;
-    background: #F7C1BB;
-    margin: 0 1rem 1rem 1rem;
+    background: whitesmoke;
+    margin: 1.5rem 1rem 1rem 1rem;
+    padding: 0;
 }
 
 .event_card-invisible{
     height: auto;
     opacity: 0;
     margin: 0 1rem 1rem 1rem;
+}
+
+.events-title{
+    background: blue;
+    width: 80%;
+    margin: 0 auto;
+    transform: translate(0, -15px);
 }
 
 .event_card ul{
@@ -39,4 +47,50 @@
     width: 100%;
     border: none;
     background: rgb(66, 206, 140);
+    cursor: pointer;
+}
+
+.my_event_edit_button:hover{
+    background: rgb(15, 105, 63);
+}
+
+.event-article{
+    padding-left: 3rem;
+    padding-right: 2rem;
+}
+
+.more-info{
+    position: absolute;
+    height: 4vh;
+    width: 4vh;
+    background: white;
+    right: -3%;
+    top: -4%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.more-info:hover{
+    background: blue;
+}
+
+.link-to-chat{
+    position: absolute;
+    height: 4vh;
+    width: 4vh;
+    background: white;
+    right: -3%;
+    top: 15%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.link-to-chat:hover{
+    background: green;
 }

@@ -1,0 +1,35 @@
+                <div class="modal fade" id='eventChatModal<%=event.id%>' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"><%= event.title %></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>                       
+                            <div class="modal-body">
+                                <ul class="d-flex flex-column list-message">
+                                <% event.messages.each do |message| %>
+                                    <div class="chat">
+                                        <% if current_user.id == message.author %>
+                                            <li class="my_message message">
+                                                <p><%= User.find(message.author).firstname %> :</br><%= message.content %></p>                                            
+                                            </li>
+                                        <% else %>
+                                            <li class="other_message message">
+                                                <p><%= User.find(message.author).firstname %> :</br><%= message.content %></p>                                            
+                                            </li>
+                                        <% end %>
+                                    </div>
+                                <% end %>
+                                </ul>
+                                
+                                
+                                <%= form_tag event_message_index_path(event.id), method: "post", class: '' do %>
+                                    <input type="hidden" name="authenticity_token" value= <%= form_authenticity_token %> >
+                                    <%= text_field_tag :content, "",placeholder: 'Ecrire un message', class: 'form-control', id: ''%>
+                                <% end %>                           
+                            </div>
+                        </div>
+                    </div>
+                </div>

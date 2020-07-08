@@ -13,6 +13,18 @@ class GuestController < ApplicationController
         end
     end
 
+
+    def update
+      puts params
+
+      @guest = Guest.find(params[:id])
+      if @guest.update(admitted: true)
+          redirect_to request.referrer;
+      else
+        redirect_to request.referrer;
+      end
+    end
+
     def destroy
       @guest = Guest.find(params[:id])
       @guest.destroy
