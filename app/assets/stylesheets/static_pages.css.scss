@@ -131,3 +131,11 @@ textarea:focus, input:focus{
       border: 4px solid rgb(240, 158, 6);
     }
   }
+
+
+  @media screen and (max-width: 7500px) {
+    .bot-profil-left{
+      border-right: 0px solid black;
+      border-bottom: 2px solid black;
+    }
+  }

@@ -1,105 +1,78 @@
-<div class="devise-container devise-container-edit d-flex flex-column justify-content-center">
-  <h2 class="text-center title-edit">Edit Profil</h2>
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
-
-
-
-    <div class="d-flex container border border-dark">
-      <div class="pre-field">
+<div class="container-index-event">
+    <div class="container">
+    <h2 class="text-center">Edit Profil</h2>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+  
+  
+  
+      <div class="d-flex justify-content-around">
         <div class="field field4">
           <%= f.text_field :firstname, autofocus: true, autocomplete: "firstname", placeholder: 'firstname' %>
         </div>
-      </div>
-      
-      <div class="pre-field">
+        
         <div class="field field4">
           <%= f.text_field :lastname, autofocus: true, autocomplete: "lastname", placeholder: 'lastname' %>
         </div>
-      </div>
-
-      <div class="pre-field">
-        <div class="field field4 d-flex justify-content-center">
+  
+        <div class="field field4">
           <%= f.date_field :birthdate, start_year: 1995, class: 'datetime' %>
         </div>
       </div>
-    
-      <div class="pre-field">
+  
+      <div class="d-flex justify-content-around">
         <div class="field field4">
           <%= f.text_field :country, autofocus: true, autocomplete: "country", placeholder: 'country' %>
         </div>
-      </div>
-
-      <div class="pre-field">
+  
         <div class="field field4">
           <%= f.text_field :city, autofocus: true, autocomplete: "city", placeholder: 'city' %>
         </div>
-      </div>
-
-      <div class="pre-field">
+  
         <div class="field field4">
           <%= f.text_field :profession, autofocus: true, autocomplete: "profession", placeholder: 'profession' %>
         </div>
       </div>
-    
-
-      <div class="pre-field">
+  
+      <div class="d-flex justify-content-around">
         <div class="field field4">
           <%= f.text_field :description, autofocus: true, autocomplete: "description", placeholder: 'description' %>
         </div>
-      </div>
-
-      <div class="pre-field">
+  
         <div class="field field4">
           <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'email' %>
         </div>
+  
+        <label class="field4 btn-file">
+          Upload a profil picture
+          <input required="required" accept="image/*" type="file" name="user[avatar]" id="user_avatar">
+        </label>
       </div>
-
-      <div class="pre-field">
-        <div class="field field-file">
-          <p class="field-file-text">Choisir une image </p>
-          <span id="file-field">
-            <%= f.file_field :avatar %>
-          <span>
-        </div>
-      </div>
-    </div>
-
-    <h1 class="text-center mt-2">Edit Password</h1>
-    
-    <div class="d-flex container border border-dark">
+  
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>
-
-      <div class="pre-field">
+  
+      <div class="d-flex justify-content-around">
         <div class="field field-password">
           <%= f.password_field :password, autocomplete: "new-password", placeholder: 'password (leave blank if u dont change it)' %>
         </div>
-      </div>
-
-      <div class="pre-field">
+  
         <div class="field field-password">
           <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'confirm password' %>
         </div>
-      </div>
-    </div>
-
-    <div class="d-flex container">
-      <div class="pre-field">
+  
         <div class="field5">
           <%= f.password_field :current_password, autocomplete: "current-password", placeholder: 'password to confirm changes' %>
         </div>
       </div>
-    </div>
-    
-    <div class="d-flex container">
-      <div class="pre-field">
-        <div class="actions">
-          <%= f.submit "Update" %>
-        </div>
+  
+      <div class="actions">
+        <%= f.submit "Update" %>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  
+  
   <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "delete-account" %>
+    </div>
 </div>

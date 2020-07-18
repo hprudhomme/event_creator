@@ -31,45 +31,41 @@
           <% end %>
         </ul>
       </div>
-      <div class="container-navbar container">
+      <div class="container-navbar container-fluid">
         <h2 class="title">bla<span id="title-color">bla</span></h2>
         <nav id="nav">
           <ul>
             <li>
-              <%= link_to "ACCUEIL", root_path %>
+              <button class="animation-border profil-button bz"><%= link_to "ACCUEIL", root_path, class:"bzz" %></button>
             </li>
-            <% if user_signed_in? %>
+            <% if user_signed_in? %>              
               <li>
-                <%= link_to "Profil", user_path(current_user.id) %>
+                <button class="animation-border profil-button bz"><%= link_to "Events", event_index_path, class:"bzz" %></button>
               </li>
 
               <li>
-                <%= link_to "Events", event_index_path %>
-              </li>
-              
-              <li>
-                <%= link_to "Mes events", user_events_path(current_user.id) %>
+                <button class="animation-border profil-button bz"><a data-toggle="modal" data-target="#newEventModal" data-remote="<%= new_event_path %> #modal-new-fields" class="text-center add-categorie bzz">New event</a></button>
               </li>
 
-              <li>
-                <a data-toggle="modal" data-target="#newEventModal" data-remote="<%= new_event_path %> #modal-new-fields" class="text-center add-categorie">New event</a>
-              </li>
-
-              <li class="sign-out">
-                <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-              </li>
-
-              <li class="edit">
-                <%= link_to "Edit", edit_user_registration_path %>
+              </li class="dropdown">
+                <div class="profil">
+                  <button class="profil-button animation-border">Profil</button>
+                    <ul>
+                      <li><%= link_to "Profil", user_path(current_user.id) %></li>
+                      <li><%= link_to "Mes events", user_events_path(current_user.id) %></li>
+                      <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+                      <li><%= link_to "Edit", edit_user_registration_path %></li>
+                    </ul>
+                </div>
               </li>
 
             <% else %>
               <li class="sign-in">    
-                <%= link_to "Sign in", new_user_session_path %>
+              <button class="animation-border profil-button bz"><%= link_to "Sign in", new_user_session_path, class:"bzz" %></button>
               </li>
 
               <li class="sign-up">
-                <%= link_to "Sign up", new_user_registration_path %>
+              <button class="animation-border profil-button bz"><%= link_to "Sign up", new_user_registration_path, class:"bzz" %></button>
               </li>
 
             <% end %>

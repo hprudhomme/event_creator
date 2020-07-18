@@ -1,0 +1,50 @@
+.modal-header{
+    background: #283044;
+    color: white;
+}
+
+.modal-header button{
+    color: white;
+}
+
+.modal-header button:hover{
+    color: black;
+    cursor: pointer;
+}
+
+.modal-event-infos-underline{
+    color: #F18701;
+}
+
+#modal-event-infos-date p{
+    display: inline;
+}
+
+.modal-event-infos-guests{
+    color: #F18701;
+}
+
+.modal-event-infos-guests:hover{
+    color: #E54B4B;
+    cursor: pointer;
+}
+
+.modal-footer{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.btn-modal-event-infos{
+    background: #283044;
+    color: white;
+    border: none;
+    padding: 10px;
+}
+
+.btn-modal-event-infos:hover{
+    background: #4F7CAC;
+    cursor: pointer;
+}
+
+

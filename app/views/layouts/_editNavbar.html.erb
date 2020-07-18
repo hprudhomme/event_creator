@@ -1,72 +1,72 @@
 <header>
-      <div class="menu-toggle" id="hamburger">
-          <i class="fas fa-bars"></i>
-      </div>
-      <div class="overlay">
-        <ul>
-          <li>
-            <%= link_to "ACCUEIL", root_path %>
-          </li>
-          <li><a href="" id="nav-item2">ABOUT</a></li>
-          <li><a href="" id="nav-item3">SKILLS</a></li>
-          <li><a href="" id="nav-item4">CONTACT</a></li>
-          <% if user_signed_in? %>
-          <li class="sign-out">
-            <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-          </li>
+<div class="menu-toggle" id="hamburger">
+    <i class="fas fa-bars"></i>
+</div>
+<div class="overlay">
+  <ul>
+    <li>
+      <%= link_to "ACCUEIL", root_path %>
+    </li>
+    <li><a href="" id="nav-item2">ABOUT</a></li>
+    <li><a href="" id="nav-item3">SKILLS</a></li>
+    <li><a href="" id="nav-item4">CONTACT</a></li>
+    <% if user_signed_in? %>
+    <li class="sign-out">
+      <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+    </li>
 
-          <li class="edit">
-            <%= link_to "Edit", edit_user_registration_path %>
-          </li>
+    <li class="edit">
+      <%= link_to "Edit", edit_user_registration_path %>
+    </li>
 
-        <% else %>
-          <li class="sign-in">    
-            <%= link_to "Sign in", new_user_session_path %>
-          </li>
+  <% else %>
+    <li class="sign-in">    
+      <%= link_to "Sign in", new_user_session_path %>
+    </li>
 
-          <li class="sign-up">
-            <%= link_to "Sign up", new_user_registration_path %>
-          </li>
+    <li class="sign-up">
+      <%= link_to "Sign up", new_user_registration_path %>
+    </li>
 
-          <% end %>
-        </ul>
-      </div>
-      <div class="container">
-        <h2 class="title">bla<span id="title-color">bla</span></h2>
-        <nav id="nav">
-          <ul>
-            <li>
-              <%= link_to "ACCUEIL", root_path %>
-            </li>
-            <% if user_signed_in? %>
-              <li>
-                <%= link_to "Profil", user_path(current_user.id) %>
-              </li>
-              
-              <li>
-                <%= link_to "Mes events", user_events_path(current_user.id) %>
-              </li>
+    <% end %>
+  </ul>
+</div>
+<div class="container-navbar container-fluid">
+  <h2 class="title">bla<span id="title-color">bla</span></h2>
+  <nav id="nav">
+    <ul>
+      <li>
+        <button class="animation-border profil-button bz"><%= link_to "ACCUEIL", root_path, class:"bzz" %></button>
+      </li>
+      <% if user_signed_in? %>              
+        <li>
+          <button class="animation-border profil-button bz"><%= link_to "Events", event_index_path, class:"bzz" %></button>
+        </li>
 
-              <li class="sign-out">
-                <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-              </li>
+        </li class="dropdown">
+          <div class="profil">
+            <button class="profil-button animation-border">Profil</button>
+              <ul>
+                <li><%= link_to "Profil", user_path(current_user.id) %></li>
+                <li><%= link_to "Mes events", user_events_path(current_user.id) %></li>
+                <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+                <li><%= link_to "Edit", edit_user_registration_path %></li>
+              </ul>
+          </div>
+        </li>
 
-              <li class="edit">
-                <%= link_to "Edit", edit_user_registration_path %>
-              </li>
+      <% else %>
+        <li class="sign-in">    
+        <button class="animation-border profil-button bz"><%= link_to "Sign in", new_user_session_path, class:"bzz" %></button>
+        </li>
 
-            <% else %>
-              <li class="sign-in">    
-                <%= link_to "Sign in", new_user_session_path %>
-              </li>
+        <li class="sign-up">
+        <button class="animation-border profil-button bz"><%= link_to "Sign up", new_user_registration_path, class:"bzz" %></button>
+        </li>
 
-              <li class="sign-up">
-                <%= link_to "Sign up", new_user_registration_path %>
-              </li>
+      <% end %>
+    </ul>
+  </nav>
+</div>
 
-            <% end %>
-          </ul>
-        </nav>
-      </div>
-      
-    </header>
+</header>
