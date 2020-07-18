@@ -17,9 +17,4 @@ class ApplicationController < ActionController::Base
   def after_sign_out_path_for(resource_or_scope)
     root_path
   end
-
-  before_action :set_admin
-  def set_admin
-    @event = Event.new
-  end
 end
