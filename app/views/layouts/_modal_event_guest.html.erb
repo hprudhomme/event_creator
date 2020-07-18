@@ -2,26 +2,29 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <h5 class="modal-title text-center" id="exampleModalLabel">Guests</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <% if event.user_id == current_user.id %>
                             <div class="modal-body">
+                            <% if Guest.where(event_id: event.id).length == 0 %>
+                                <p>Aucun Invité</p>
+                            <% else %>
                                 <% Guest.where(event_id: event.id).each_with_index do |guest, k| %>
                                     <div class="d-flex justify-content-between">
-                                        <%= link_to guest.name, user_path(User.find_by(firstname: guest.name).id), class: 'text-dark' %>
-                                        <div>
+                                        <%= link_to guest.name, user_path(User.find_by(firstname: guest.name).id), class: 'link-name-guest' %>
+                                        <div class="d-flex">
                                             <% if Guest.find(guest.id).admitted == 0 %>
-                                                <%= form_tag event_guest_path(event.id, guest.id), method: "patch", class: '' do %>   
+                                                <%= form_tag event_guest_path(event.id, guest.id), method: "patch", class: 'button-add-guest' do %>   
                                                     <%= button_tag type: 'submit', class: "", id: "" do %>
                                                         <i class="fas fa-plus mr-2 accept-guest"></i>
                                                     <% end %>
                                                 <%end%>
                                             <% end %>
                                             
-                                            <%= form_tag event_guest_path(event.id, guest.id), method: "delete", class: '' do %>   
+                                            <%= form_tag event_guest_path(event.id, guest.id), method: "delete", class: 'button-remove-guest' do %>   
                                                 <%= button_tag type: 'submit', class: "", id: "" do %>
                                                     <i class="fas fa-times delete-guest"></i>
                                                 <% end %>
@@ -29,23 +32,27 @@
                                         </div>
                                     </div>
                                 <% end %>
-                                <h5>Invités un ami :</h5>
-                                <%= form_tag event_guest_index_path(event.id), method: "post", class: 'form-unsuscrib d-flex' do %>
-                                    <input type="hidden" name="authenticity_token" value= <%= form_authenticity_token %> >
-                                    <%= hidden_field_tag :admitted, 1 %>
-                                    <div class="form-group">
-                                        <%= label_tag(:q, "id:") %>
-                                        <%= number_field_tag :id_of_user %>
-                                    </div>
-                                    <%= submit_tag "Ajouter", class: 'btn-subscrib'%>
-                                <% end %>
+                            <% end %>
+                                <div class="add-friend"
+                                    <h5>Inviter un ami :</h5>
+                                    <%= form_tag event_guest_index_path(event.id), method: "post", class: 'form-add-friend' do %>
+                                        <input type="hidden" name="authenticity_token" value= <%= form_authenticity_token %> >
+                                        <%= hidden_field_tag :admitted, 1 %>
+                                        <%= text_field_tag :id_of_user, nil, placeholder: "id", class: "pl-1" %>
+                                        <%= submit_tag "Ajouter", class: 'btn-add-friend'%>
+                                    <% end %>
+                                </div>
                             </div>
                         <% else %>
-                            <div class="modal-body">
-                                <% Guest.where(event_id: event.id).each_with_index do |guest, k| %>
-                                        <%= link_to guest.name, user_path(User.find_by(firstname: guest.name).id), class: 'text-dark' %>
-                                <% end %>
-                            </div>
+                            <% if Guest.where(event_id: event.id).length == 0 %>
+                                <p>Aucun Invité</p>
+                            <% else %>
+                                <div class="modal-body">
+                                    <% Guest.where(event_id: event.id).each_with_index do |guest, k| %>
+                                            <%= link_to guest.name, user_path(User.find_by(firstname: guest.name).id), class: 'link-name-guest' %>
+                                    <% end %>
+                                </div>
+                            <% end %>
                         <% end %>
                         </div>
                     </div>

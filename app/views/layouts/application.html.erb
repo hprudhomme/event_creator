@@ -21,11 +21,9 @@
       <%= render 'layouts/editNavbar' %>
     <% else %>
       <%= render 'layouts/navbar' %>
-    <% end %>
-    <%= yield %>
-    <% if !request.url.include?('edit') %>
       <%= render 'layouts/modal_new_event' %>
     <% end %>
+    <%= yield %>
     
   </body>
 

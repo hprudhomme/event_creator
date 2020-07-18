@@ -2,7 +2,11 @@ class UsersController < ApplicationController
     
     def show
         @user = User.find(params[:id])
-        @age = ((Time.zone.now - @user.birthdate.to_time) / 1.year.seconds).floor
+        if(@user.birthdate != nil)
+            @age = ((Time.zone.now - @user.birthdate.to_time) / 1.year.seconds).floor
+        else
+            @age = ""
+        end
     end
 
     def my_events

@@ -1,35 +1,49 @@
-<div id="slide1">
+<div id="slide-profil">
       <div class="container bla">
-          <div class="wrapper">
-              <div class="one">
-                  <div id="profil-picture">
-                      <p><%= @user.avatar.attached? %></p>
-                  </div>
-                  <h3 id="name"><%= @user.firstname + " " + @user.lastname %></h3>
-              </div>
-              <div class="two text-center">
-                <h4 class="text-center mt-3 title-profil">Description</h4>
+        <div class="row">
+          <div class="col-12 head-profil">
+            <div class="profil-picture">
+              <%= image_tag(current_user.avatar_thumbnail, id: "profil-img") %>
+            </div>
+            <h3 id="name"><%= @user.firstname + " " + @user.lastname %></h3>
+          </div>
+        </div>
+      
+        <div class="row">
+          <div class="col-lg-6 col-12 bot-profil bot-profil-left">
+            <h4 class="text-center mt-3 title-profil">Description</h4>
+              <% if @user == current_user %>
                 <% if @user.description == nil %>
                   <p id="description"><%= link_to "Add a description", edit_user_registration_path, class: "buzz" %></p>
                 <% else %>
                   <p id="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis, eius rem, a at blanditiis reprehenderit facere error, facilis similique est nostrum mollitia? Commodi culpa expedita officia, totam ducimus assumenda soluta.</p>
                 <% end %>
-              </div>
-              <div class="three">
-                <h4 class="text-center mt-3 title-profil">Informations</h4>
-                <div class="wrapper2">
-                  <div class="w2-1"><p>Age: <%= @age %></p></div>
-                  <div class="w2-2"><p>Sexe: homme</p></div>
-                  <div class="w2-3"><p>Pays: <%= @user.country %></p></div>
-                  <div class="w2-4"><p>Ville: <%= @user.city %></p></div>
-                  <div class="w2-5"><p>Hobby: Foot, Cinéma</p></div>
-                  <div class="w2-6"><p>Profession: <%= @user.profession %></p></div>
-                  <% if current_user.id == params[:id].to_i %>
-                    <div class="w2-7"><p><%= link_to "Change informations", edit_user_registration_path, class: "buzz" %></p></div>
-                  <% end %>
-                </div>
-              </div>
+              <% else %>
+                <p id="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis, eius rem, a at blanditiis reprehenderit facere error, facilis similique est nostrum mollitia? Commodi culpa expedita officia, totam ducimus assumenda soluta.</p>
+              <% end %>
           </div>
-      </div>
-      <div id="black-bottom-div"></div>
+
+          <div class="col-lg-6 col-12 bot-profil">
+            <h4 class="text-center mt-3 title-profil">Informations</h4>
+            <div class="row buzzi">
+              <div class="col-6 bot-profil2">
+                <p>Age: <%= @age %></p>
+                <p>Sexe: homme</p>
+                <p>Pays: <%= @user.country %></p>
+              </div>
+              <div class="col-6 bot-profil2">
+                <p>Ville: <%= @user.city %></p>
+                <p>Hobby: Foot, Cinéma</p>
+                <p>Profession: <%= @user.profession %></p>
+              </div>
+              <% if current_user.id == params[:id].to_i %>
+                <div class="w2-7"><p><%= link_to "Change informations", edit_user_registration_path, class: "buzz" %></p></div>
+              <% end %>
+            </div>
+
+
+
+          </div>
+        </div>
+    </div>
 </div>

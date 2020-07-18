@@ -1,7 +1,61 @@
+.link-name-guest{
+    color: black;
+}
+
+.link-name-guest:hover{
+    cursor: pointer;
+    color: #4F7CAC;
+}
+
 .accept-guest{
-    color: green;
+    color: #4F7CAC;
 }
 
 .delete-guest{
-    color: red;
+    color: #C42021;
+}
+
+.button-add-guest button{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.button-remove-guest button{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.add-friend{
+    border-top: 3px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    padding-top: 1rem;
+}
+
+.form-add-friend{
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+}
+
+.form-add-friend input{
+    border-radius: 5px;
+}
+
+.btn-add-friend{
+    background: #5B618A;
+    color: white;
+    border: none;
+    margin-left: 5px;
+    padding: 4px 15px;
+    cursor: pointer;
+}
+
+.btn-add-friend:hover{
+    background: #9EADC8;
+    color: black;
 }

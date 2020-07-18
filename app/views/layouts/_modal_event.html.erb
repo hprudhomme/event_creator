@@ -2,32 +2,34 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="eventModalLabel">Modal title</h5>
+                                <h5 class="modal-title" id="eventModalLabel"><%= event.title %></h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <p><%= event.title %></p>
-                                <p><%= event.catégorie %></p>
-                                <p><%= event.description %></p>
-                                <p><%= event.date.strftime("%A %d %B") %></p>
-                                <p><%= event.date.to_formatted_s(:time).gsub!(':', 'h')%></p>
-                                <p data-toggle="modal" data-target='#eventGuestModal<%=event.id%>'>Guests</p>
-                            <% if User.find_by(id: event.user_id).id == current_user.id %>
-                                <%= form_tag event_path(event.id), method: "delete", class: 'w4' do %>
-                                    <%= submit_tag "Supprimer", class: 'btn-delete-guest'%>
+                                <p><span class="modal-event-infos-underline">Description:</span> </br><%= event.description %></p>
+                                <div id="modal-event-infos-date" class="mb-3">
+                                    <p class="mr-4"><span class="modal-event-infos-underline">Date:</span> <%= event.date.strftime("%A %d %B") %></p>
+                                    <p><span class="modal-event-infos-underline">Horaire:</span> <%= event.date.to_formatted_s(:time).gsub!(':', 'h')%></p>
+                                </div>
+                                <p class="modal-event-infos-guests" data-toggle="modal" data-target='#eventGuestModal<%=event.id%>'>Guests</p>
+                            </div>
+                            <div class="modal-footer">
+                                <% if User.find_by(id: event.user_id).id == current_user.id %>
+                                    <%= form_tag event_path(event.id), method: "delete", class: 'w4' do %>
+                                        <%= submit_tag "Supprimer", class: 'btn-modal-event-infos'%>
+                                    <% end %>
+                                <% elsif isAlreadyGuest(current_user, event) %>
+                                    <%= form_tag event_guest_path(event.id, Guest.find_by(event_id: event.id, name: current_user.firstname).id), method: "delete", class: 'w4' do %>
+                                        <%= submit_tag "Se désinscrire", class: 'btn-modal-event-infos'%>
+                                    <% end %>
+                                <% else %>
+                                    <%= form_tag event_guest_index_path(event.id), method: "post", class: 'w4' do %>
+                                        <input type="hidden" name="authenticity_token" value= <%= form_authenticity_token %> >
+                                        <%= submit_tag "S'inscrire", class: 'btn-modal-event-infos'%>
+                                    <% end %>
                                 <% end %>
-                            <% elsif isAlreadyGuest(current_user, event) %>
-                                <%= form_tag event_guest_path(event.id, Guest.find_by(event_id: event.id, name: current_user.firstname).id), method: "delete", class: 'w4' do %>
-                                    <%= submit_tag "Se désinscrire", class: 'btn-unsubscribed-guest'%>
-                                <% end %>
-                            <% else %>
-                                <%= form_tag event_guest_index_path(event.id), method: "post", class: 'w4' do %>
-                                    <input type="hidden" name="authenticity_token" value= <%= form_authenticity_token %> >
-                                    <%= submit_tag "S'inscrire", class: 'btn-add-guest'%>
-                                <% end %>
-                            <% end %>
                             </div>
                         </div>
                     </div>

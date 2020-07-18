@@ -3,6 +3,7 @@
         <span class"">Filter by :</span>
         <%= form_tag(event_index_path, :method => "get", id: "search-form") do %>
             <%= text_field_tag :searchCategorie, params[:searchCategorie], id: 'search-bar', placeholder: "Catégorie" %>
+            <%= text_field_tag :searchCity, params[:searchCity], id: 'search-bar', placeholder: "City" %>
             <%= text_field_tag :searchDate, params[:searchDate], class: 'datepicker-search', id: 'search-bar', placeholder: "Date" %>
             <button type="submit" class="submit-form"><i class="fas fa-search"></i></button>
         <% end %>

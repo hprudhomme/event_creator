@@ -89,6 +89,23 @@
   font-size: 1.3rem;
 }
 
+@media screen and (max-width: 770px) {
+  .search-form {
+    flex-direction: column;
+  }
+
+  #search-form{
+    display: flex;
+    flex-direction: column;
+    width: 15rem;
+  }
+
+  #search-bar{
+    margin-bottom: 5px;
+    width: 100%;
+  }
+}
+
 /*
 .wrapper-index-event{
   display: grid;

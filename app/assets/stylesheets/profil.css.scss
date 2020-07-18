@@ -1,5 +1,13 @@
 #slide1{
   background: black;
+  min-height: 100vh;
+  height: auto;
+}
+
+#slide-profil{
+  background: black;
+  min-height: 100vh;
+  height: auto;
 }
 
 #profil-name{
@@ -9,7 +17,7 @@
 
 .bla{
   height: 100%;
-  background: black;
+  background: whitesmoke;
 }
 
 
@@ -49,11 +57,20 @@
   color: black;
 }
 
+.buzz:hover{
+  color: #415A77;
+}
+
 #profil-picture{
     height: 200px;
     width: 200px;
     border: 2px solid  black;
     border-radius: 50%;
+}
+
+#profil-img{
+  border: 2px solid  black;
+  border-radius: 50%;
 }
 
 #name{
@@ -63,12 +80,13 @@
 #description{
   max-width: 50%;
   margin: 0 auto;
-  margin-top: 2.5rem;
-  overflow: hidden;
+  align-self: center;
 }
 
 .title-profil{
-  background: rgb(240, 158, 6);
+  //background: rgb(240, 158, 6);
+  text-decoration: underline;
+  margin-bottom: 3rem;
 }
 
 .wrapper2 {
@@ -134,13 +152,8 @@
   justify-content: center;
   border-bottom: 1px solid black;
 }
-
-.wrapper2 .w2-7{
-  grid-column: 2/4;
-  grid-row: 4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.w2-7{
+  margin: 1rem auto 0 auto;
 }
 
 #black-bottom-div{
@@ -152,3 +165,54 @@
   background: black;
 }
 
+
+// new
+
+.head-profil{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:center;
+  height: 60vh;
+  border-bottom: 2px solid black;
+}
+
+.bot-profil{
+  height: 39vh;
+}
+
+.bot-profil-left{
+  border-right: 2px solid black;
+}
+
+.bot-profil2{
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.row{
+  width: 100%;
+}
+
+
+.description-container{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.buzzi{
+  margin: 0 auto;
+}
+
+
+@media screen and (max-width: 990px) {
+  .bot-profil-left{
+    border-right: 0px solid black;
+    border-bottom: 2px solid black;
+  }
+}

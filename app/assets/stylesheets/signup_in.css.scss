@@ -1,0 +1,68 @@
+.devise-container{
+    min-height: 100vh;
+    height: auto;
+    background: #18191f;
+}
+
+.log-in-container{
+    width: 400px;
+  padding: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+  background: #18191f;
+  box-shadow: -4px -4px 3px rgba(255,255,255,0.05),
+                5px 5px 3px rgba(0,0,0,0.2)
+  }
+
+  .log-in-container a{
+    text-decoration-color: white;
+    color: white;
+  }
+
+  .field1 input, .field2 input{
+    border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  }
+
+  .field1 input:focus, .field2 input:focus{
+    width: 280px;
+    border-color: #2ecc71;
+  }
+
+  .field3{
+    color: white;
+  }
+
+  .actions input{
+    border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+  }
+
+  .actions input:hover{
+    background: #2ecc71;
+  }
+
+
