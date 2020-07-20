@@ -18,12 +18,12 @@
             <h4 class="text-center mt-3 title-profil">Description</h4>
               <% if @user == current_user %>
                 <% if @user.description == nil %>
-                  <p id="description"><%= link_to "Add a description", edit_user_registration_path, class: "buzz" %></p>
+                  <p id="description"><%= link_to "Add a description", edit_user_registration_path, class: "buzz text-dark" %></p>
                 <% else %>
-                  <p id="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis, eius rem, a at blanditiis reprehenderit facere error, facilis similique est nostrum mollitia? Commodi culpa expedita officia, totam ducimus assumenda soluta.</p>
+                  <p id="description"><%= @user.description %></p>
                 <% end %>
               <% else %>
-                <p id="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis, eius rem, a at blanditiis reprehenderit facere error, facilis similique est nostrum mollitia? Commodi culpa expedita officia, totam ducimus assumenda soluta.</p>
+                <p id="description"><%= @user.description %></p>
               <% end %>
           </div>
 
@@ -32,7 +32,7 @@
             <div class="row buzzi">
               <div class="col-6 bot-profil2">
                 <p>Age: <%= @age %></p>
-                <p>Sexe: homme</p>
+                <p>Sexe: blabla</p>
                 <p>Pays: <%= @user.country %></p>
               </div>
               <div class="col-6 bot-profil2">
@@ -41,7 +41,7 @@
                 <p>Profession: <%= @user.profession %></p>
               </div>
               <% if current_user.id == params[:id].to_i %>
-                <div class="w2-7"><p><%= link_to "Change informations", edit_user_registration_path, class: "buzz" %></p></div>
+                <div class="w2-7"><p><%= link_to "Change informations", edit_user_registration_path, class: "buzz text-dark" %></p></div>
               <% end %>
             </div>
 
