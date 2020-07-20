@@ -197,7 +197,7 @@ class EventController < ApplicationController
       @id = params[:id]
     end
 
-    def update     
+    def update
         if !params[:public].present?
           @public = false
         else
@@ -205,8 +205,8 @@ class EventController < ApplicationController
         end
 
       @event = Event.find(params[:id])
-      if @event.update(title: params[:title], description: params[:description], catégorie: params[:catégorie], date: params[:date], public: @public, city: @city)
-          redirect_to request.referrer;
+      if @event.update(title: params[:title], description: params[:description], catégorie: params[:catégorie], date: params[:date], public: @public, city: params[:city])
+        redirect_to request.referrer;
       else
         redirect_to request.referrer;
       end

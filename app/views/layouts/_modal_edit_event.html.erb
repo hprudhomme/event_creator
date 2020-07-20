@@ -19,13 +19,18 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <%= label_tag(:q, "City:") %>
+                                        <%= text_field_tag :city, event.city, placeholder: 'Choose a city', class: 'form-control', id: 'new-event-city'%>
+                                    </div>
+
+                                    <div class="form-group">
                                         <%= label_tag(:q, "Description:") %>
                                         <%= text_field_tag :description, event.description ,placeholder: 'Ajouter une description', class: 'form-control', id: 'new-event-description'%>
                                     </div>
                                     
                                     <div class="form-group d-flex justify-content-between">
                                         <div class="flatpickr">
-                                            <%= f.text_field :date, placeholder: 'select a date', class: 'datepicker' %>
+                                            <%= text_field_tag :date, event.date, placeholder: 'select a date', class: 'datepicker' %>
                                             <a class="input-button calendar-icon" title="toggle" data-toggle>
                                                 <i class="fas fa-calendar-alt"></i>
                                             </a>

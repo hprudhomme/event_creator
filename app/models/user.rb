@@ -20,7 +20,7 @@ class User < ApplicationRecord
     if avatar.attached?
       avatar.variant(resize: "180x180!").processed
     else
-      "/default_profile.jpg"
+      "profile.jpg"
     end
   end
 end
