@@ -4,12 +4,7 @@
           <div class="col-12 head-profil">
             <div class="profil-picture">
             <% if @user.avatar.attached? %>
-              <% puts @user.avatar.inspect %>
-              <% if @user.avatar == nil %>
-                <p> ca marche po </p>
-              <% else %>
               <%= image_tag @user.avatar.variant(resize: "180x180!").processed, alt: "Mon image", width: 180, height: 180, id: "profil-img" %>
-              <% end %>
             <% else %>
               <%= image_tag "profile.jpg", alt: "Mon image", width: 180, height: 180, id: "profil-img" %>
             <% end %>
