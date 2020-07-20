@@ -1,24 +1,5 @@
-# README
+Site de création d'événements ou vous pouvez créer un événement que des gens pourront rejoindre ( si la case public a été coché à sa création, sinon ca sera à vous d'inviter qui vous souhaitez), ou rejoindre un événement.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Une fois inscris, il faudra attendre que la personne ayant créé l'événement accepte votre demande.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Après avoir été accepté dans un événement, vous aurez le droit d'accéder au chat lié à ce dernier.
